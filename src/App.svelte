@@ -306,7 +306,7 @@
 
 <nav class="navbar is-primary" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item is-size-4 has-text-weight-bold" href="/">
+    <a class="navbar-item is-size-4 has-text-weight-bold">
       <img src="favicon.png" alt="OBS-web" class="rotate" /></a
     >
 
@@ -354,137 +354,11 @@
                 <span class="icon"><Icon path={mdiAccessPoint} /></span>
               </button>
             {/if}
-            {#if heartbeat && heartbeat.recording && heartbeat.recording.outputActive}
-              {#if heartbeat.recording.outputPaused}
-                <button
-                  class="button is-danger"
-                  on:click={resumeRecording}
-                  title="Resume Recording"
-                >
-                  <span class="icon"><Icon path={mdiPlayPause} /></span>
-                </button>
-              {:else}
-                <button
-                  class="button is-success"
-                  on:click={pauseRecording}
-                  title="Pause Recording"
-                >
-                  <span class="icon"><Icon path={mdiPause} /></span>
-                </button>
-              {/if}
-              <button
-                class="button is-danger"
-                on:click={stopRecording}
-                title="Stop Recording"
-              >
-                <span class="icon"><Icon path={mdiStop} /></span>
-                <span>{formatTime(heartbeat.recording.outputDuration)}</span>
-              </button>
-            {:else}
-              <button
-                class="button is-danger is-light"
-                on:click={startRecording}
-                title="Start Recording"
-              >
-                <span class="icon"><Icon path={mdiRecord} /></span>
-              </button>
-            {/if}
-            {#if isVirtualCamActive}
-              <button
-                class="button is-danger"
-                on:click={stopVirtualCam}
-                title="Stop Virtual Webcam"
-              >
-                <span class="icon"><Icon path={mdiCameraOff} /></span>
-              </button>
-            {:else}
-              <button
-                class="button is-danger is-light"
-                on:click={startVirtualCam}
-                title="Start Virtual Webcam"
-              >
-                <span class="icon"><Icon path={mdiCamera} /></span>
-              </button>
-            {/if}
-            <button
-              class:is-light={!isStudioMode}
-              class="button is-link"
-              on:click={toggleStudioMode}
-              title="Toggle Studio Mode"
-            >
-              <span class="icon"><Icon path={mdiBorderVertical} /></span>
-            </button>
-            <button
-              class:is-light={!isSceneOnTop}
-              class="button is-link"
-              on:click={switchSceneView}
-              title="Show Scene on Top"
-            >
-              <span class="icon"><Icon path={mdiArrowSplitHorizontal} /></span>
-            </button>
-            <button
-              class:is-light={!editable}
-              class="button is-link"
-              title="Edit Scenes"
-              on:click={() => (editable = !editable)}
-            >
-              <span class="icon">
-                <Icon path={editable ? mdiImageEditOutline : mdiImageEdit} />
-              </span>
-            </button>
-            <button
-              class:is-light={!isIconMode}
-              class="button is-link"
-              title="Show Scenes as Icons"
-              on:click={() => (isIconMode = !isIconMode)}
-            >
-              <span class="icon">
-                <Icon
-                  path={isIconMode
-                    ? mdiSquareRoundedBadgeOutline
-                    : mdiSquareRoundedBadge}
-                />
-              </span>
-            </button>
-            <button
-              class:is-light={!isReplaying}
-              class:is-danger={replayError}
-              class="button is-link"
-              title="Toggle Replay Buffer"
-              on:click={toggleReplay}
-            >
-              <span class="icon">
-                <Icon
-                  path={isReplaying ? mdiMotionPlayOutline : mdiMotionPlay}
-                />
-              </span>
-              {#if replayError}<span>{replayError}</span>{/if}
-            </button>
-            <ProfileSelect />
-            <SceneCollectionSelect />
-            <button
-              class="button is-danger is-light"
-              on:click={disconnect}
-              title="Disconnect"
-            >
-              <span class="icon"><Icon path={mdiConnection} /></span>
-            </button>
           {:else}
             <button class="button is-danger" disabled
               >{errorMessage || 'Disconnected'}</button
             >
           {/if}
-          <!-- svelte-ignore a11y-missing-attribute -->
-          <button
-            class:is-light={!isFullScreen}
-            class="button is-link"
-            on:click={toggleFullScreen}
-            title="Toggle Fullscreen"
-          >
-            <span class="icon">
-              <Icon path={isFullScreen ? mdiFullscreenExit : mdiFullscreen} />
-            </span>
-          </button>
         </div>
       </div>
     </div>
@@ -593,7 +467,7 @@
   </div>
 </section>
 
-<footer class="footer">
+<!-- <footer class="footer">
   <div class="content has-text-centered">
     <p>
       <strong>OBS-web</strong>
@@ -604,4 +478,4 @@
       for source code.
     </p>
   </div>
-</footer>
+</footer> -->
