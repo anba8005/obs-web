@@ -90,6 +90,11 @@
 
     // Export the sendCommand() function to the window object
     window.sendCommand = sendCommand
+
+    // enable/disable on window active
+    document.addEventListener("visibilitychange", (event) => {
+      isWindowActive = document.visibilityState === "visible";
+    });
   })
 
   // State
@@ -109,6 +114,7 @@
   let replayError = ''
   let errorMessage = ''
   let imageFormat = 'jpg'
+  let isWindowActive = true
 
   $: isIconMode
     ? window.localStorage.setItem('isIconMode', 'true')
@@ -262,10 +268,13 @@
       imageFormat = 'webp'
     }
     heartbeatInterval = setInterval(async () => {
-      const stats = await sendCommand('GetStats')
-      const streaming = await sendCommand('GetStreamStatus')
-      const recording = await sendCommand('GetRecordStatus')
-      heartbeat = { stats, streaming, recording }
+      if (isWindowActive) {
+        const stats = await sendCommand('GetStats')
+        const streaming = await sendCommand('GetStreamStatus')
+        const recording = await sendCommand('GetRecordStatus')
+        console.log('query ' + new Date())
+        heartbeat = { stats, streaming, recording }
+      }
       // console.log(heartbeat);
     }, 1000) // Heartbeat
     isStudioMode =
