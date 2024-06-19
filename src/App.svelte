@@ -272,7 +272,6 @@
         const stats = await sendCommand('GetStats')
         const streaming = await sendCommand('GetStreamStatus')
         const recording = await sendCommand('GetRecordStatus')
-        console.log('query ' + new Date())
         heartbeat = { stats, streaming, recording }
       }
       // console.log(heartbeat);
